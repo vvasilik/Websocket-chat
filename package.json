@@ -1,17 +1,28 @@
 {
-  "name": "websocket-try",
-  "version": "1.0.0",
-  "description": "",
+  "name": "node-js-getting-started",
+  "version": "0.2.6",
+  "description": "A sample Node.js app using Express 4",
+  "engines": {
+    "node": "6.10.2"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.15.3",
-    "node-static": "^0.7.9",
+    "ejs": "2.5.6",
+    "express": "4.15.2",
+	"node-static": "^0.7.9",
     "ws": "^3.0.0"
   },
-  "devDependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }
