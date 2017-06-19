@@ -19,7 +19,7 @@ wss.on("connection", function(ws) {
     var id = Math.random();
     clients[id] = ws;
     for(var key in clients) {
-        clients[key].send(clients[key]);
+        clients[key].send(key);
     }
     console.log("websocket connection open")
 
