@@ -27,7 +27,7 @@ wss.on("connection", function(ws) {
 
     ws.on('message', function(message) {
         for(var key in clients) {
-            clients[key].send("hiiiiiiii");
+            clients[key].send(message);
         }
     })
 
