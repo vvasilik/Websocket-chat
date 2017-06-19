@@ -15,7 +15,9 @@ var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
 var clients = [];
+var counter = [];
 wss.on("connection", function(ws) {
+    counter++;
     var id = Math.random();
     clients[id] = ws;
     for(var key in clients) {
@@ -24,6 +26,7 @@ wss.on("connection", function(ws) {
     console.log("websocket connection open")
 
     ws.on("close", function() {
+        counter--;
         delete clients[id];
     })
 })
