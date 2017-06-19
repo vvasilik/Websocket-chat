@@ -24,7 +24,7 @@ wss.on("connection", function(ws) {
     console.log("websocket connection open")
 
     ws.on("close", function() {
-        console.log("websocket connection close");
+        delete clients[id];
     })
 })
 
