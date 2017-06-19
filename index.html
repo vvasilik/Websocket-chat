@@ -11,18 +11,16 @@
         <input type="submit" value="Отправить"/>
     </form>
 </div>
-<div class="chat__output js-chat__output"></div>
-
-
-
-<ul id='pings'></ul>
+<div class="chat__output">
+    <ul id='js-chat__output'></ul>
+</div>
 <script>
     var host = location.origin.replace(/^http/, 'ws')
     var ws = new WebSocket(host);
     ws.onmessage = function (event) {
         var li = document.createElement('li');
         li.innerHTML = JSON.parse(event.data);
-        document.querySelector('#pings').appendChild(li);
+        document.querySelector('.js-chat__output').appendChild(li);
     };
     // var host = location.origin.replace(/^http/, 'ws')
     // var socket = new WebSocket(host);
