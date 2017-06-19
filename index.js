@@ -20,7 +20,7 @@ var WebSocketServer = new require('ws');
 var clients = {};
 
 // WebSocket-server 8081
-var webSocketServer = new WebSocketServer.Server();
+var webSocketServer = new WebSocketServer.Server({port: 3030});
 webSocketServer.on('connection', function(ws, req) {
   var id = Math.random();
   clients[id] = ws;
