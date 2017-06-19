@@ -36,7 +36,7 @@ wss.on("connection", function(ws) {
         delete clients[id];
 
         for(var key in clients) {
-            clients[key].send("total: " + counter);
+            clients[key].send("Total: " + counter);
         }
     })
 })
