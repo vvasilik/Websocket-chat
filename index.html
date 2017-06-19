@@ -19,7 +19,7 @@
     var ws = new WebSocket(host);
     ws.onmessage = function (event) {
         var li = document.createElement('li');
-        li.innerHTML = JSON.parse(event.data);
+        li.innerHTML = event.data;
         document.querySelector('.js-chat__output').appendChild(li);
     };
     // var host = location.origin.replace(/^http/, 'ws')
