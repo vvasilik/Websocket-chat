@@ -25,6 +25,12 @@ wss.on("connection", function(ws) {
     }
     console.log("websocket connection open")
 
+    ws.on('message', function(message) {
+        for(var key in clients) {
+            clients[key].send("hiiiiiiii");
+        }
+    })
+
     ws.on("close", function() {
         counter--;
         delete clients[id];
