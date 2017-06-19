@@ -14,13 +14,13 @@ app.listen(app.get('port'), function() {
 });
 
 
-var WebSocketServer = new require('ws');
+const WebSocket = require('ws');
 
 // clients
 var clients = {};
 
 // WebSocket-server 8081
-var webSocketServer = new WebSocketServer.Server({port: 3030});
+var webSocketServer = new WebSocket("wss://vvasilik-chat.herokuapp.com:3030");
 webSocketServer.on('connection', function(ws, req) {
   var id = Math.random();
   clients[id] = ws;
