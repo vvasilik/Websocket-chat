@@ -14,7 +14,7 @@ app.listen(app.get('port'), function() {
 });
 
 
-var WebSocketServer = new require('ws');
+var WebSocketServer = require('ws');
 
 // clients
 var clients = {};
