@@ -11,22 +11,34 @@ server.listen(port)
 
 
 var wss = new WebSocketServer({server: server})
-wss.on('connection', function(ws, req) {
-  var id = Math.random();
-  clients[id] = ws;
-  console.log("new connetion " + id);
+wss.on("connection", function(ws) {
+  var id = setInterval(function() {
+    ws.send(JSON.stringify(new Date()), function() {  })
+  }, 1000)
 
-  ws.on('message', function(message) {
-    console.log('get message ' + message);
+  console.log("websocket connection open")
 
-    for(var key in clients) {
-      clients[key].send(message);
-    }
-  });
-
-  ws.on('close', function() {
-    console.log('connection closed ' + id);
-    delete clients[id];
-  });
-
-});
+  ws.on("close", function() {
+    console.log("websocket connection close")
+    clearInterval(id)
+  })
+})
+// wss.on('connection', function(ws, req) {
+//   var id = Math.random();
+//   clients[id] = ws;
+//   console.log("new connetion " + id);
+//
+//   ws.on('message', function(message) {
+//     console.log('get message ' + message);
+//
+//     for(var key in clients) {
+//       clients[key].send(message);
+//     }
+//   });
+//
+//   ws.on('close', function() {
+//     console.log('connection closed ' + id);
+//     delete clients[id];
+//   });
+//
+// });
