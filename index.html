@@ -12,6 +12,10 @@
     </form>
 </div>
 <div class="chat__output js-chat__output"></div>
+
+
+
+<ul id='pings'></ul>
 <script>
     var host = location.origin.replace(/^http/, 'ws')
     var ws = new WebSocket(host);
