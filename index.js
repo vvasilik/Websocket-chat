@@ -9,11 +9,15 @@ app.use(express.static(__dirname + "/"))
 var server = http.createServer(app)
 server.listen(port)
 
-var clients = [];
+console.log("http server listening on %d", port)
+
 var wss = new WebSocketServer({server: server})
+console.log("websocket server created")
+
 wss.on("connection", function(ws) {
-  var id = Math.random();
-  clients[id] = ws;
+  var id = setInterval(function() {
+    ws.send(JSON.stringify(new Date()), function() {  })
+  }, 1000)
 
   console.log("websocket connection open")
 
@@ -21,13 +25,8 @@ wss.on("connection", function(ws) {
     console.log("websocket connection close")
     clearInterval(id)
   })
-
- ws.on('message', function(message) {
-     for(var key in clients) {
-         clients[key].send(message);
-     }
- });
 })
+
 // wss.on('connection', function(ws, req) {
 //   var id = Math.random();
 //   clients[id] = ws;
