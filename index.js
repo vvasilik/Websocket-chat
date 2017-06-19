@@ -1,42 +1,28 @@
-var express = require('express');
-var app = express();
+var WebSocketServer = require("ws").Server
+var http = require("http")
+var express = require("express")
+var app = express()
+var port = process.env.PORT || 5000
 
-app.set('port', (process.env.PORT || 5000));
+app.use(express.static(__dirname + "/"))
 
-app.use(express.static(__dirname + '/public'));
+var server = http.createServer(app)
+server.listen(port)
 
-app.get('/', function(request, response) {
-  response.render('public/index');
-});
+console.log("http server listening on %d", port)
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
+var wss = new WebSocketServer({server: server})
+console.log("websocket server created")
 
+wss.on("connection", function(ws) {
+  var id = setInterval(function() {
+    ws.send(JSON.stringify(new Date()), function() {  })
+  }, 1000)
 
-var WebSocketServer = require('ws');
+  console.log("websocket connection open")
 
-// clients
-var clients = {};
-
-// WebSocket-server 8081
-var webSocketServer = new WebSocketServer.Server({port: 8081});
-webSocketServer.on('connection', function(ws, req) {
-  var id = Math.random();
-  clients[id] = ws;
-  console.log("new connetion " + id);
-
-  ws.on('message', function(message) {
-    console.log('get message ' + message);
-
-    for(var key in clients) {
-      clients[key].send(message);
-    }
-  });
-
-  ws.on('close', function() {
-    console.log('connection closed ' + id);
-    delete clients[id];
-  });
-
-});
+  ws.on("close", function() {
+    console.log("websocket connection close")
+    clearInterval(id)
+  })
+})
