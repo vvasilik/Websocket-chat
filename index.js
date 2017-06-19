@@ -16,11 +16,3 @@ app.get('/', function(request, response) {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-
-// var express = require('express');
-// var app = express();
-// app.use('/static', express.static(__dirname + '/public'));
-
-// app.get('/', function (req, res) {
-//   res.send('Hello World!');
-// });
