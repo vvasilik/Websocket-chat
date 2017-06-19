@@ -14,26 +14,13 @@ app.listen(app.get('port'), function() {
 });
 
 
-
-var http = require('http');
-var server = http.createServer(function(request, response) {
-    console.log((new Date()) + ' Received request for ' + request.url);
-    response.writeHead(404);
-    response.end();
-});
-server.listen(8080, function() {
-    console.log((new Date()) + ' Server is listening on port 8080');
-});
-
 var WebSocketServer = new require('ws');
 
 // clients
 var clients = {};
 
 // WebSocket-server 8081
-var webSocketServer = new WebSocketServer.Server({
-    httpServer: server
-});
+var webSocketServer = new WebSocketServer.Server({port: 3030});
 webSocketServer.on('connection', function(ws, req) {
   var id = Math.random();
   clients[id] = ws;
