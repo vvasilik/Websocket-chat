@@ -15,7 +15,7 @@ var wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
 var clients = [];
-var counter = [];
+var counter = 0;
 wss.on("connection", function(ws) {
     counter++;
     var id = Math.random();
