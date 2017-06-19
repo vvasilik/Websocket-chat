@@ -26,7 +26,8 @@
     var form = document.querySelector(".js-chat__form");
     var input = form.querySelector(".js-chat__input");
 
-    form.addEventListener("submit", function() {
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
         ws.send(input.value);
     })
     // var host = location.origin.replace(/^http/, 'ws')
