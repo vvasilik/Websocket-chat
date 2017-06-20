@@ -101,5 +101,6 @@ body {
     color: #fdf5f5;
     background: #696b69;
     border: none;
+    border-radius: 12px;
     resize: none
 }
