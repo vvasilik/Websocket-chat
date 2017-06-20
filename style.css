@@ -19,11 +19,17 @@ input, textarea {outline: none;}
 
 span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inherit; text-transform: inherit;}
 
+body {
+    background: #fffaf0;
+}
+
 .chat {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    max-width: 960px;
     height: 100%;
+    margin: 0 auto;
     padding: 5px;
 }
 
@@ -41,9 +47,7 @@ span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inh
 
 .chat__frame {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     margin: 0 0 5px;
     padding: 20px;
     background: #f6ffff;
@@ -52,9 +56,14 @@ span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inh
 }
 
 .chat__name {
+    margin: 0 0 10px;
     font-size: 12px;
     line-height: 15px;
     color: #f00;
+}
+
+.chat__message {
+    padding: 0 0 0 20px;
 }
 
 .chat__form {

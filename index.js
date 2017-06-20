@@ -11,16 +11,16 @@ ws.onmessage = function (event) {
     var li = document.createElement('li');
     li.className = "chat__frame";
 
-    var messageEl = document.createElement('span');
-    messageEl.className = "chat__message";
-    messageEl.innerText = data.message;
-
     var nameEl = document.createElement('span');
     nameEl.className = "chat__name";
     nameEl.innerText = data.name;
 
-    li.appendChild(messageEl);
+    var messageEl = document.createElement('span');
+    messageEl.className = "chat__message";
+    messageEl.innerText = data.message;
+
     li.appendChild(nameEl);
+    li.appendChild(messageEl);
 
     document.querySelector('.js-chat__list').appendChild(li);
     output.scrollTop = output.scrollHeight;
