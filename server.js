@@ -23,7 +23,7 @@ wss.on("connection", function(ws) {
     for(var key in clients) {
         var data = {
             message: "You have new connection! Total: " + counter,
-            name: "empty"
+            name: "system"
         }
         clients[key].send(JSON.stringify(data));
     }
