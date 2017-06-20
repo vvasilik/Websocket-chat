@@ -1,7 +1,7 @@
 /* RESET */
-html {min-height: 100%; width: 100%; -ms-overflow-style: -ms-autohiding-scrollbar;}
+html {height: 100%; width: 100%; -ms-overflow-style: -ms-autohiding-scrollbar;}
 html::-webkit-scrollbar {display: none;}
-body {margin: 0; overflow-y: scroll; overflow-x: hidden;}
+body {height: 100%; margin: 0; overflow-y: scroll; overflow-x: hidden;}
 
 h1, h2, h3, h4, h5, h6, p, ul, li, dl, dd, dt {padding: 0; margin: 0;}
 h1, h2, h3, h4, h5, h6, p, li, dd, dt, span, a {line-height: 1em; font-weight: normal;}
@@ -23,7 +23,7 @@ span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inh
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    height: 100vh;
+    height: 100%;
     padding: 5px;
 }
 
@@ -50,6 +50,7 @@ span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inh
 .chat__form {
     flex: 0 0 auto;
     overflow: hidden;
+    margin: 5px 0 0
 }
 
 .chat__input {
