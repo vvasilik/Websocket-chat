@@ -42,16 +42,20 @@ body {
 .chat__list {
     display: flex;
     flex-direction: column;
-    background: #fff;
     border-radius: 12px;
 }
 
 .chat__frame {
     display: flex;
     flex-direction: column;
-    margin: 0 0 5px;
-    padding: 20px;
+    margin: 0 20px 5px 0;
+    padding: 15px;
     word-wrap: break-word;
+    background: #fff;
+}
+
+.chat__frame._self {
+    margin: 0 0 5px 20px;
 }
 
 .chat__name {
@@ -80,7 +84,7 @@ body {
     max-width: 100% !important;
     height: 115px !important;
     max-height: 115px !important;
-    margin: 0 0 20px;
+    margin: 0 0 10px;
     padding: 10px;
     border: none;
     border-radius: 12px;
