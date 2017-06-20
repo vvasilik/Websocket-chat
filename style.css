@@ -40,11 +40,21 @@ span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inh
 }
 
 .chat__frame {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 0 5px;
     padding: 20px;
     background: #f6ffff;
     border: 1px solid #000;
     word-wrap: break-word;
+}
+
+.chat__name {
+    font-size: 12px;
+    line-height: 15px;
+    color: #f00;
 }
 
 .chat__form {

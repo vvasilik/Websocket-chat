@@ -10,7 +10,18 @@ ws.onmessage = function (event) {
 
     var li = document.createElement('li');
     li.className = "chat__frame";
-    li.innerHTML = data.message + " " + data.name;
+
+    var messageEl = document.createElement('span');
+    messageEl.className = "chat__message";
+    messageEl.innerText = data.message;
+
+    var nameEl = document.createElement('span');
+    nameEl.className = "chat__name";
+    nameEl.innerText = data.name;
+
+    li.appendChild(messageEl);
+    li.appendChild(nameEl);
+
     document.querySelector('.js-chat__list').appendChild(li);
     output.scrollTop = output.scrollHeight;
 };
@@ -25,4 +36,4 @@ form.addEventListener("submit", function(e) {
     input.value = "";
 })
 
-var name = prompt("Enter your name : ", "your name");
+var name = prompt("Enter your name : ", "noname");
