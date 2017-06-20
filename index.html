@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Chat</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="chat">
+    <div class="chat__output">
+        <ul class="chat__list js-chat__output"></ul>
+    </div>
     <form class="chat__form js-chat__form">
         <input class="chat__input js-chat__input" type="text">
-        <input type="submit" value="Отправить"/>
+        <input class="chat__submit" type="submit" value="Отправить"/>
     </form>
-</div>
-<div class="chat__output">
-    <ul class="js-chat__output"></ul>
 </div>
 <script src="index.js"></script>
 </body>
