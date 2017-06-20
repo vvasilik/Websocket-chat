@@ -31,6 +31,7 @@ body {
     height: 100%;
     margin: 0 auto;
     padding: 5px;
+    background: #f6ffff;
 }
 
 .chat__output {
@@ -50,8 +51,6 @@ body {
     flex-direction: column;
     margin: 0 0 5px;
     padding: 20px;
-    background: #f6ffff;
-    border: 1px solid #000;
     word-wrap: break-word;
 }
 
@@ -60,6 +59,7 @@ body {
     font-size: 12px;
     line-height: 15px;
     color: #f00;
+    text-transform: uppercase;
 }
 
 .chat__message {
@@ -68,26 +68,27 @@ body {
 
 .chat__form {
     flex: 0 0 auto;
-    overflow: hidden;
+    display: flex;
     margin: 5px 0 0
 }
 
 .chat__input {
-    display: block;
+    flex: 1 1 auto;
     box-sizing: border-box;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 115px !important;
+    max-height: 115px !important;
+    margin: 0 0 20px;
     padding: 10px;
     font-size: 20px;
     line-height: 23px;
 }
 
-.chat__input-holder {
-    overflow: hidden;
-}
-
 .chat__submit {
-    float: right;
-    height: auto;
+    flex: 0 0 auto;
+    align-self: flex-end;
+    height: 45px;
     border-radius: 0;
     margin: 0 0 0 5px;
     padding: 11px 20px;
@@ -97,5 +98,5 @@ body {
     line-height: 23px;
     border: 1px solid #000;
     color: #000;
-    background: #9aea9d;
+    background: #696b69;
 }
