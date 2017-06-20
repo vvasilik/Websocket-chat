@@ -42,27 +42,37 @@ span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inh
 .chat__frame {
     margin: 0 0 10px;
     padding: 10px;
-    background: #f8f8f8;
+    background: #f6ffff;
     border: 1px solid #000;
 }
 
 .chat__form {
     flex: 0 0 auto;
-    display: flex;
-
+    overflow: hidden;
 }
 
 .chat__input {
-    flex: 1 1 auto;
-    margin: 0 10px 0 0;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
     padding: 10px;
     font-size: 20px;
     line-height: 23px;
 }
 
+.chat__input-holder {
+    overflow: hidden;
+}
+
 .chat__submit {
-    flex: 0 0 auto;
-    padding: 10px 20px;
+    float: right;
+    margin: 0 0 0 10px;
+    padding: 11px 20px;
     font-size: 20px;
     line-height: 23px;
+    font-size: 20px;
+    line-height: 23px;
+    border: 1px solid #000;
+    color: #000;
+    background: #9aea9d;
 }
