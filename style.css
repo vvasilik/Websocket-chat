@@ -24,7 +24,7 @@ span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inh
     flex-direction: column;
     box-sizing: border-box;
     height: 100vh;
-    padding: 20px;
+    padding: 5px;
 }
 
 .chat__output {
