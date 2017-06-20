@@ -42,7 +42,7 @@ body {
 .chat__list {
     display: flex;
     flex-direction: column;
-    background: #f6ffff;
+    background: #fff;
     border-radius: 12px;
 }
 
@@ -92,15 +92,12 @@ body {
     flex: 0 0 auto;
     align-self: flex-end;
     height: 45px;
-    border-radius: 0;
     padding: 8px 12px;
-    font-size: 20px;
-    line-height: 23px;
-    font-size: 20px;
-    line-height: 23px;
+    font-size: 16px;
+    line-height: 22px;
     color: #fdf5f5;
     background: #696b69;
     border: none;
     border-radius: 12px;
-    resize: none
+    resize: none;
 }
