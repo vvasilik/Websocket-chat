@@ -20,7 +20,7 @@ input, textarea {outline: none;}
 span {font-size: inherit; font-family: inherit; font-weight: inherit; color: inherit; text-transform: inherit;}
 
 body {
-    background: #fffaf0;
+    background: #f7f5f2;
 }
 
 .chat {
@@ -31,19 +31,19 @@ body {
     height: 100%;
     margin: 0 auto;
     padding: 5px;
-    background: #f6ffff;
 }
 
 .chat__output {
     flex: 1 1 auto;
     overflow: auto;
-    font-size: 20px;
-    line-height: 23px;
+    font: 16px/22px monospace;
 }
 
 .chat__list {
     display: flex;
     flex-direction: column;
+    background: #f6ffff;
+    border-radius: 12px;
 }
 
 .chat__frame {
@@ -56,8 +56,8 @@ body {
 
 .chat__name {
     margin: 0 0 10px;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 10px;
+    line-height: 14px;
     color: #f00;
     text-transform: uppercase;
 }
@@ -69,6 +69,7 @@ body {
 .chat__form {
     flex: 0 0 auto;
     display: flex;
+    flex-direction: column;
     margin: 5px 0 0
 }
 
@@ -81,6 +82,8 @@ body {
     max-height: 115px !important;
     margin: 0 0 20px;
     padding: 10px;
+    border: none;
+    border-radius: 12px;
     font-size: 20px;
     line-height: 23px;
 }
@@ -90,13 +93,13 @@ body {
     align-self: flex-end;
     height: 45px;
     border-radius: 0;
-    margin: 0 0 0 5px;
-    padding: 11px 20px;
+    padding: 8px 12px;
     font-size: 20px;
     line-height: 23px;
     font-size: 20px;
     line-height: 23px;
-    border: 1px solid #000;
-    color: #000;
+    color: #fdf5f5;
     background: #696b69;
+    border: none;
+    resize: none
 }
