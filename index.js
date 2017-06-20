@@ -8,9 +8,10 @@ function initChat() {
 
     ws.onmessage = function (event) {
         var data = JSON.parse(event.data);
+        var selfClassName = "_self";
 
         var li = document.createElement('li');
-        li.className = "chat__frame";
+        li.className = "chat__frame " + name === data.name ? selfClassName : "";
 
         var nameEl = document.createElement('span');
         nameEl.className = "chat__name";
