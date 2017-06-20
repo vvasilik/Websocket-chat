@@ -11,7 +11,7 @@ function initChat() {
         var selfClassName = "_self";
 
         var li = document.createElement('li');
-        li.className = "chat__frame " + name === data.name ? selfClassName : "";
+        li.className = "chat__frame " + (name === data.name ? selfClassName : "");
 
         var nameEl = document.createElement('span');
         nameEl.className = "chat__name";
