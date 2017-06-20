@@ -21,22 +21,30 @@ wss.on("connection", function(ws) {
     var id = Math.random();
     clients[id] = ws;
     for(var key in clients) {
-        clients[key].send("You have new connection! Total: " + counter);
+        var data = {
+            message: "You have new connection! Total: " + counter,
+            name: "empty"
+        }
+        clients[key].send(JSON.stringify(data));
     }
     console.log("websocket connection open")
 
-    ws.on('message', function(message) {
+    ws.on('message', function(data) {
         for(var key in clients) {
-            clients[key].send(message);
+            clients[key].send(data);
         }
     })
 
     ws.on("close", function() {
         counter--;
         delete clients[id];
+        var data = {
+            message: "Total: " + counter,
+            name: "noname"
+        }
 
         for(var key in clients) {
-            clients[key].send("Total: " + counter);
+            clients[key].send(JSON.stringify(data));
         }
     })
 })

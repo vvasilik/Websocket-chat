@@ -5,15 +5,21 @@ var host = location.origin.replace(/^http/, 'ws');
 var ws = new WebSocket(host);
 
 ws.onmessage = function (event) {
+    var data = JSON.parse(event.data);
+
     var li = document.createElement('li');
     li.className = "chat__frame";
-    li.innerHTML = event.data;
+    li.innerHTML = data.message + " " + data.name;
     document.querySelector('.js-chat__list').appendChild(li);
     output.scrollTop = output.scrollHeight;
 };
 
 form.addEventListener("submit", function(e) {
     e.preventDefault();
-    ws.send(input.value);
+    var data = {
+        message: input.value,
+        name: "noname"
+    }
+    ws.send(JSON.stringify(data));
     input.value = "";
 })
