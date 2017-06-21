@@ -31,7 +31,7 @@ function initChat() {
     form.addEventListener("submit", submitMessage);
 
     input.addEventListener("keydown", function(e) {
-        if (e.keyCode === 13) submitMessage();
+        if (e.keyCode === 13) submitMessage(e);
     })
 
     function submitMessage(e) {
