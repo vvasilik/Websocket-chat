@@ -2,37 +2,43 @@ function initChat() {
     var form = document.querySelector(".js-chat__form");
     var output = document.querySelector(".js-chat__output");
     var input = form.querySelector(".js-chat__input");
-    var name = form.querySelector(".js-chat__name");
     var host = location.origin.replace(/^http/, 'ws');
     var ws = new WebSocket(host);
+    var name;
 
-    ws.onmessage = function (event) {
-        var data = JSON.parse(event.data);
-        var selfClassName = "_self";
+    addListeners();
+    getUserInfo();
 
-        var li = document.createElement('li');
-        li.className = "chat__frame " + (name === data.name ? selfClassName : "");
+    function addListeners() {
 
-        var nameEl = document.createElement('span');
-        nameEl.className = "chat__name";
-        nameEl.innerText = data.name;
+        form.addEventListener("submit", submitMessage);
 
-        var messageEl = document.createElement('span');
-        messageEl.className = "chat__message";
-        messageEl.innerText = data.message;
+        input.addEventListener("keydown", function(e) {
+            if (e.keyCode === 13) submitMessage(e);
+        });
 
-        li.appendChild(nameEl);
-        li.appendChild(messageEl);
+        ws.onmessage = function (event) {
+            var data = JSON.parse(event.data);
+            var selfClassName = "_self";
 
-        document.querySelector('.js-chat__list').appendChild(li);
-        output.scrollTop = output.scrollHeight;
-    };
+            var li = document.createElement('li');
+            li.className = "chat__frame " + (name === data.name ? selfClassName : "");
 
-    form.addEventListener("submit", submitMessage);
+            var nameEl = document.createElement('span');
+            nameEl.className = "chat__name";
+            nameEl.innerText = data.name;
 
-    input.addEventListener("keydown", function(e) {
-        if (e.keyCode === 13) submitMessage(e);
-    })
+            var messageEl = document.createElement('span');
+            messageEl.className = "chat__message";
+            messageEl.innerText = data.message;
+
+            li.appendChild(nameEl);
+            li.appendChild(messageEl);
+
+            document.querySelector('.js-chat__list').appendChild(li);
+            output.scrollTop = output.scrollHeight;
+        };
+    }
 
     function submitMessage(e) {
         e.preventDefault();
@@ -44,7 +50,9 @@ function initChat() {
         input.value = "";
     }
 
-    var name = prompt("Enter your name : ", "noname");
+    function getUserInfo() {
+        name = prompt("Enter your name : ", "noname");
+    }
 }
 
 initChat();
