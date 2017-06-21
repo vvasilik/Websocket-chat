@@ -28,7 +28,13 @@ function initChat() {
         output.scrollTop = output.scrollHeight;
     };
 
-    form.addEventListener("submit", function(e) {
+    form.addEventListener("submit", submitMessage);
+
+    input.addEventListener("keydown", function(e) {
+        if (e.keyCode === 13) submitMessage();
+    })
+
+    function submitMessage(e) {
         e.preventDefault();
         var data = {
             message: input.value,
@@ -36,7 +42,7 @@ function initChat() {
         }
         ws.send(JSON.stringify(data));
         input.value = "";
-    })
+    }
 
     var name = prompt("Enter your name : ", "noname");
 }
