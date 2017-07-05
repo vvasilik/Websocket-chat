@@ -1,6 +1,7 @@
 function initChat() {
     var recordingClass = "_recording";
     var isRecording = false;
+    var systemSendWords = ["отправить", "отправить сообщение", "send", "send message"];
     var form = document.querySelector(".js-chat__form");
     var output = document.querySelector(".js-chat__output");
     var input = form.querySelector(".js-chat__input");
@@ -19,23 +20,30 @@ function initChat() {
         return recognitionEl;
     }
 
+    function getUserInfo() {
+        var name = prompt("Enter your name : ", "noname");
+
+        return {
+            name: name
+        }
+    }
+
     function addListeners(recognitionEl) {
-        rec.addEventListener("click", recButtonAction)
-
+        rec.addEventListener("click", function() {
+            recButtonAction.call(this, recognitionEl);
+        })
         recognitionEl.addEventListener("result", getRecognitionResult);
-
         recognitionEl.addEventListener("end", setRecInactive);
-
-        form.addEventListener("submit", submitMessage);
-
-        input.addEventListener("keydown", function(e) {
-            if (e.keyCode === 13) submitMessage(e);
-        });
-
+        form.addEventListener("submit", submitForm);
+        input.addEventListener("keydown", keyboardListener);
         ws.addEventListener("message", renderMessage);
     }
 
-    function recButtonAction() {
+    function keyboardListener(e) {
+        if (e.keyCode === 13) submitForm(e);
+    }
+
+    function recButtonAction(recognitionEl) {
         if (isRecording) {
             setRecInactive();
             recognitionEl.stop();
@@ -43,8 +51,6 @@ function initChat() {
             setRecActive();            
             recognitionEl.start();
         }
-
-        isRecording = !isRecording;
     }
 
     function getRecognitionResult(e) {
@@ -58,8 +64,16 @@ function initChat() {
             .join("");
 
         if (e.results[0].isFinal) {
-            input.value = input.value + transcript + ". ";
+            if (isSystemWord(transcript)) {
+                sendMessage();
+            } else {
+                input.value = input.value + transcript + ". ";
+            }
         }   
+    }
+
+    function isSystemWord(word) {
+        return systemSendWords.indexOf(word.toLowerCase()) !== -1;
     }
 
     function renderMessage(e) {
@@ -85,29 +99,27 @@ function initChat() {
     }
     
     function setRecInactive() {
+        isRecording = false;
         rec.classList.remove(recordingClass);
     };
 
     function setRecActive() {
+        isRecording = true;
         rec.classList.add(recordingClass);
     }
 
-    function submitMessage(e) {
+    function submitForm(e) {
         e.preventDefault();
+        sendMessage();
+    }
+
+    function sendMessage() {
         var data = {
             message: input.value,
             name: info.name || "noname"
         }
         ws.send(JSON.stringify(data));
         input.value = "";
-    }
-
-    function getUserInfo() {
-        var name = prompt("Enter your name : ", "noname");
-
-        return {
-            name: name
-        }
     }
 }
 
