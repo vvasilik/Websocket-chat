@@ -91,23 +91,11 @@ function initChat() {
         messageEl.className = "chat__message";
         messageEl.innerText = data.message;
 
-        var speaker = document.createElement("span");
-        speaker.className = "chat__speaker js-chat__speaker";
-        speaker.addEventListener("click", function() {
-            spellMessage(data.message);
-        });
-
         li.appendChild(nameEl);
         li.appendChild(messageEl);
-        li.appendChild(speaker);
 
         document.querySelector('.js-chat__list').appendChild(li);
         output.scrollTop = output.scrollHeight;
-    }
-
-    function spellMessage(msg) {
-        var speech = new SpeechSynthesisUtterance(msg);
-        speechSynthesis.speak(speech);
     }
     
     function setRecInactive() {
