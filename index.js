@@ -1,4 +1,5 @@
 function initChat() {
+    var isSpeachSupport = typeof SpeechSynthesisUtterance !== "undefined";
     var recordingClass = "_recording";
     var isRecording = false;
     var systemSendWords = ["отправить", "отправить сообщение", "send", "send message"];
@@ -86,20 +87,21 @@ function initChat() {
         var nameEl = document.createElement('span');
         nameEl.className = "chat__name";
         nameEl.innerText = data.name;
+        li.appendChild(nameEl);
 
         var messageEl = document.createElement('span');
         messageEl.className = "chat__message";
         messageEl.innerText = data.message;
-
-        var speaker = document.createElement("span");
-        speaker.className = "chat__speaker js-chat__speaker";
-        speaker.addEventListener("click", function() {
-            spellMessage(data.message);
-        });
-
-        li.appendChild(nameEl);
         li.appendChild(messageEl);
-        li.appendChild(speaker);
+
+        if (isSpeachSupport) {
+            var speaker = document.createElement("span");
+            speaker.className = "chat__speaker js-chat__speaker";
+            speaker.addEventListener("click", function() {
+                spellMessage(data.message);
+            });
+            li.appendChild(speaker);
+        }
 
         document.querySelector('.js-chat__list').appendChild(li);
         output.scrollTop = output.scrollHeight;
