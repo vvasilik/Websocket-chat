@@ -71,16 +71,16 @@ body {
     padding: 0 40px 0 20px;
 }
 
-.chat__speaker {
-    position: absolute;
-    top: 25px;
-    right: 17px;
-    width: 20px;
-    height: 20px;
-    background: url(images/speaker.svg) 50% 50% no-repeat;
-    background-size: 100%;
-    opacity: .6;
-}
+.chat__speaker { 
+    position: absolute; 
+    top: 25px; 
+    right: 17px; 
+    width: 20px; 
+    height: 20px; 
+    background: url(images/speaker.svg) 50% 50% no-repeat; 
+    background-size: 100%; 
+    opacity: .6; 
+} 
 
 .chat__form {
     flex: 0 0 auto;
@@ -119,6 +119,7 @@ body {
 }
 
 .chat__rec {
+    display: none;
     width: 35px;
     height: 35px;
     border: none;

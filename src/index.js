@@ -1,6 +1,8 @@
 require("./style.css");
 
 function initChat() {
+    var isSpeachSupport = typeof SpeechSynthesisUtterance !== "undefined";
+    var isSpeechRecognitionSupport = window.SpeechRecognition || window.webkitSpeechRecognition;
     var recordingClass = "_recording";
     var isRecording = false;
     var systemSendWords = ["отправить", "отправить сообщение", "send", "send message"];
@@ -10,7 +12,7 @@ function initChat() {
     var rec = form.querySelector(".js-chat__rec");
     var host = location.origin.replace(/^http/, 'ws');
     var ws = new WebSocket(host);
-    var recognition = createSpeechRecognition();
+    var recognition = isSpeechRecognitionSupport ? createSpeechRecognition() : false;
     var info = getUserInfo();
     addListeners(recognition);
 
@@ -18,6 +20,7 @@ function initChat() {
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         var recognitionEl = new SpeechRecognition();
         recognitionEl.interimResults = true;
+        rec.style.display = "inline-block";
 
         return recognitionEl;
     }
@@ -31,11 +34,14 @@ function initChat() {
     }
 
     function addListeners(recognitionEl) {
-        rec.addEventListener("click", function() {
-            recButtonAction.call(this, recognitionEl);
-        })
-        recognitionEl.addEventListener("result", getRecognitionResult);
-        recognitionEl.addEventListener("end", setRecInactive);
+        if (recognitionEl) {
+            rec.addEventListener("click", function() {
+                recButtonAction.call(this, recognitionEl);
+            })
+            recognitionEl.addEventListener("result", getRecognitionResult);
+            recognitionEl.addEventListener("end", setRecInactive);
+        }
+
         form.addEventListener("submit", submitForm);
         input.addEventListener("keydown", keyboardListener);
         ws.addEventListener("message", renderMessage);
@@ -88,20 +94,21 @@ function initChat() {
         var nameEl = document.createElement('span');
         nameEl.className = "chat__name";
         nameEl.innerText = data.name;
+        li.appendChild(nameEl);
 
         var messageEl = document.createElement('span');
         messageEl.className = "chat__message";
         messageEl.innerText = data.message;
-
-        var speaker = document.createElement("span");
-        speaker.className = "chat__speaker js-chat__speaker";
-        speaker.addEventListener("click", function() {
-            spellMessage(data.message);
-        });
-
-        li.appendChild(nameEl);
         li.appendChild(messageEl);
-        li.appendChild(speaker);
+
+        if (isSpeachSupport) {
+            var speaker = document.createElement("span");
+            speaker.className = "chat__speaker js-chat__speaker";
+            speaker.addEventListener("click", function() {
+                spellMessage(data.message);
+            });
+            li.appendChild(speaker);
+        }
 
         document.querySelector('.js-chat__list').appendChild(li);
         output.scrollTop = output.scrollHeight;
