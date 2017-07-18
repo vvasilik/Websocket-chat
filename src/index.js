@@ -1,3 +1,5 @@
+require("./style.css");
+
 function initChat() {
     var recordingClass = "_recording";
     var isRecording = false;
