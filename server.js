@@ -48,23 +48,3 @@ wss.on("connection", function(ws) {
         }
     })
 })
-
-// wss.on('connection', function(ws, req) {
-//   var id = Math.random();
-//   clients[id] = ws;
-//   console.log("new connetion " + id);
-//
-//   ws.on('message', function(message) {
-//     console.log('get message ' + message);
-//
-//     for(var key in clients) {
-//       clients[key].send(message);
-//     }
-//   });
-//
-//   ws.on('close', function() {
-//     console.log('connection closed ' + id);
-//     delete clients[id];
-//   });
-//
-// });
