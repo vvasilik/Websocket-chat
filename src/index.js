@@ -1,24 +1,24 @@
 require("./style.css");
 
 function initChat() {
-    var isSpeachSupport = typeof SpeechSynthesisUtterance !== "undefined";
-    var isSpeechRecognitionSupport = window.SpeechRecognition || window.webkitSpeechRecognition;
-    var recordingClass = "_recording";
-    var isRecording = false;
-    var systemSendWords = ["отправить", "отправить сообщение", "send", "send message"];
-    var form = document.querySelector(".js-chat__form");
-    var output = document.querySelector(".js-chat__output");
-    var input = form.querySelector(".js-chat__input");
-    var rec = form.querySelector(".js-chat__rec");
-    var host = location.origin.replace(/^http/, 'ws');
-    var ws = new WebSocket(host);
-    var recognition = isSpeechRecognitionSupport ? createSpeechRecognition() : false;
-    var info = getUserInfo();
+    const isSpeechSupport = typeof SpeechSynthesisUtterance !== "undefined";
+    const isSpeechRecognitionSupport = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recordingClass = "_recording";
+    const isRecording = false;
+    const systemSendWords = ["отправить", "отправить сообщение", "send", "send message"];
+    const form = document.querySelector(".js-chat__form");
+    const output = document.querySelector(".js-chat__output");
+    const input = form.querySelector(".js-chat__input");
+    const rec = form.querySelector(".js-chat__rec");
+    const host = location.origin.replace(/^http/, 'ws');
+    const ws = new WebSocket(host);
+    const recognition = isSpeechRecognitionSupport ? createSpeechRecognition() : false;
+    const info = getUserInfo();
     addListeners(recognition);
 
     function createSpeechRecognition() {
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        var recognitionEl = new SpeechRecognition();
+        const recognitionEl = new SpeechRecognition();
         recognitionEl.interimResults = true;
         rec.style.display = "inline-block";
 
@@ -26,7 +26,7 @@ function initChat() {
     }
 
     function getUserInfo() {
-        var name = prompt("Enter your name : ", "noname");
+        const name = prompt("Enter your name : ", "noname");
 
         return {
             name: name
@@ -62,7 +62,7 @@ function initChat() {
     }
 
     function getRecognitionResult(e) {
-        var transcript = [].slice.call(e.results)
+        const transcript = [].slice.call(e.results)
             .map(function(result){
                 return result[0];
             })
@@ -85,24 +85,24 @@ function initChat() {
     }
 
     function renderMessage(e) {
-        var data = JSON.parse(e.data);
-        var selfClassName = "_self";
+        const data = JSON.parse(e.data);
+        const selfClassName = "_self";
 
-        var li = document.createElement('li');
+        const li = document.createElement('li');
         li.className = "chat__frame " + (info.name === data.name ? selfClassName : "");
 
-        var nameEl = document.createElement('span');
+        const nameEl = document.createElement('span');
         nameEl.className = "chat__name";
         nameEl.innerText = data.name;
         li.appendChild(nameEl);
 
-        var messageEl = document.createElement('span');
+        const messageEl = document.createElement('span');
         messageEl.className = "chat__message";
         messageEl.innerText = data.message;
         li.appendChild(messageEl);
 
-        if (isSpeachSupport) {
-            var speaker = document.createElement("span");
+        if (isSpeechSupport) {
+            const speaker = document.createElement("span");
             speaker.className = "chat__speaker js-chat__speaker";
             speaker.addEventListener("click", function() {
                 spellMessage(data.message);
@@ -115,7 +115,7 @@ function initChat() {
     }
 
     function spellMessage(msg) {
-        var speech = new SpeechSynthesisUtterance(msg);
+        const speech = new SpeechSynthesisUtterance(msg);
         speechSynthesis.speak(speech);
     }
     
@@ -135,7 +135,7 @@ function initChat() {
     }
 
     function sendMessage() {
-        var data = {
+        const data = {
             message: input.value,
             name: info.name || "noname"
         }

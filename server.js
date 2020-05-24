@@ -1,36 +1,36 @@
-var WebSocketServer = require("ws").Server
-var http = require("http")
-var express = require("express")
-var app = express()
-var port = process.env.PORT || 5000
+const WebSocketServer = require("ws").Server
+const http = require("http")
+const express = require("express")
+const app = express()
+const port = process.env.PORT || 5000
 
 app.use(express.static(__dirname + "/"))
 
-var server = http.createServer(app)
+const server = http.createServer(app)
 server.listen(port)
 
-console.log("http server listening on %d", port)
+console.log("http server listening on http://localhost:%d", port)
 
-var wss = new WebSocketServer({server: server})
+const wss = new WebSocketServer({server: server})
 console.log("websocket server created")
 
-var clients = [];
-var counter = 0;
+const clients = [];
+let counter = 0;
 wss.on("connection", function(ws) {
     counter++;
-    var id = Math.random();
+    const id = Math.round(Math.random() * 1e+16);
     clients[id] = ws;
-    for(var key in clients) {
-        var data = {
+    for(let key in clients) {
+        const data = {
             message: "You have new connection! Total: " + counter,
             name: "system"
         }
         clients[key].send(JSON.stringify(data));
     }
-    console.log("websocket connection open")
+    console.log("websocket connection open", id)
 
     ws.on('message', function(data) {
-        for(var key in clients) {
+        for(const key in clients) {
             clients[key].send(data);
         }
     })
@@ -38,12 +38,12 @@ wss.on("connection", function(ws) {
     ws.on("close", function() {
         counter--;
         delete clients[id];
-        var data = {
+        const data = {
             message: "Total: " + counter,
             name: "noname"
         }
 
-        for(var key in clients) {
+        for(const key in clients) {
             clients[key].send(JSON.stringify(data));
         }
     })
